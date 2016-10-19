@@ -30,14 +30,19 @@ p{
 	text-align: center;
 }
 
+#start-button{
+	display: block;
+	margin: auto;
+}
+
+#letter-spaces{
+	letter-spacing: 7px;
+}
+
 .wrapper{
 	min-height:100%;
-	/*used -66px here because the footer height is 66px*/
+	/*used -57px for bottom margin because the footer height is 57px*/
 	margin: 0 auto -57px;
-/* added this here, so the middle section space between the
-footer and bottom of the middle section always has the
-background image showing.
-*/
 }
 
 /* required for the ryanfait sticky footer. Defining the

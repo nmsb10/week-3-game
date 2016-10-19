@@ -5,7 +5,6 @@
 	<title>Hangman Real Estate</title>
 	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-	<script type="text/javascript" src="./assets/javascript/game.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 	<body>
@@ -50,39 +49,48 @@ Definitely talk with a TA or your instructor if you get tripped up during this c
 				<p>
 				  Press any key to start playing.
 				</p>
+				<button onclick="startPlaying()" id="start-button">Click to Start Playing!</button>
 				<p>
 				  Wins:
 				</p>
-				<p>
+				<p id="score">
 				  0
 				</p>
 				<p>
 				  Current Word:
 				</p>
-				<p>
+				<p id="letter-spaces">
 				  ?
 				</p>
 				<p>
 				  Guesses remaining:
 				</p>
-				<p>
+				<p id="guesses-remaining">
 				  13
 				</p>
 				<p>
 				  Letters guessed:
 				</p>
-				<p>
+				<p id="letters-guessed">
 				  ?
+				</p>
+				<p>
+				  Attempts &amp Win % :
+				</p>
+				<p id="attempts-win-percentage">
+				  0 | 0.00%
 				</p>
 			</div> <!-- /rightside-game-status -->
 		</div> <!-- /primary-game -->
 		<a>
 		  Restart the Game.
 		</a>
-		<div class="push"></div> <!-- push for the sticky footer -->
+		<div class="push"></div> <!-- push class for the sticky footer -->
 		</div> <!-- /wrapper -->
 		<footer>
 			Copyright &copy; 2016 <a class="footer-link" href="https://www.linkedin.com/in/jonathonnagatani" title="Jonathon on LinkedIn" target="_blank">Jonathon Nagatani</a>. All Rights Reserved.
 		</footer>
+	<!-- should load the javascript after the DOM, because the DOM needs to be painted first, so THEN the javascript can change the painted DOM-->
+	<script type="text/javascript" src="./assets/javascript/game.js"></script>
 	</body>
 </html>
