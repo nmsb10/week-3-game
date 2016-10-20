@@ -1,8 +1,7 @@
-//use camelCase for naming everything in javascript
 //remember: first global variables, then objects, then calls
 var entireGame = {
-	//wordBank: ["seller", "buyer", "investor", "landlord", "renter", "broker", "contract", "home inspection", "mortgage", "cash offer", "closing", "attorney", "full price offer", "multiple offer", "contingency", "staging"],
-	wordBank:["one","two","thre","four","five"],
+	wordBank: ["seller", "buyer", "investor", "landlord", "renter", "broker", "contract", "home inspection", "mortgage", "cash offer", "closing", "attorney", "full price offer", "multiple offer", "contingency", "staging"],
+	//wordBank:["one","two","thre","four","five"],
 	currentWord: "",
 	currentLetter: "",
 	guessesRemaining: 13,
@@ -54,7 +53,7 @@ var entireGame = {
 				//the splice method will remove the one element at
 				//index i, without leaving a "undefined" "hole" in the wordBank array
 				entireGame.wordBank.splice(i,1);
-				console.log(entireGame.wordBank);
+				console.log("potential words left include: " + entireGame.wordBank);
 			}
 		}
 		if(entireGame.wordBank.length===0){
@@ -96,7 +95,9 @@ var entireGame = {
 	populateUnderscoresDisplayed: function(){
 		entireGame.underscoresDisplayed = "";
 		//use currentWord.length-1 because the last letter will be a letter
-		//with no space afterwards
+		//with no space afterwards. Use this if you plan to add "_ " per letter.
+		//otherwise can use upper boundary of currentword.length, and not have the 
+		//final underscoresDisplayed string addition of "_" 
 		for(var i = 0; i < entireGame.currentWord.length-1; i++){
 			function isLetter(check){
 				//make sure for what you are checking will be in [a-z]
@@ -108,7 +109,7 @@ var entireGame = {
 			else{
 				//remember: spaces in html and javascript are different.
 				//instead of "  ", you need to define your spaces as &nbsp;
-				entireGame.underscoresDisplayed += "&nbsp;";
+				entireGame.underscoresDisplayed += " ";
 			}
 		}		
 		entireGame.underscoresDisplayed += "_";
@@ -129,7 +130,8 @@ var entireGame = {
 			var letterAlreadyGuessed = false;
 			var correctLetters = 0;
 			//need to first check that the letter is not in lettersGuessed
-			console.log(entireGame.lettersGuessedInternal);
+			console.log("letters already guessed: " + entireGame.lettersGuessedInternal);
+			console.log("current user guess: "+ userChoice);
 			for(var i = 0; i<entireGame.lettersGuessedInternal.length; i++){
 				if(userChoice===entireGame.lettersGuessedInternal[i]){
 					letterAlreadyGuessed = true;
@@ -138,24 +140,23 @@ var entireGame = {
 			}
 			//if the letter was NOT already guessed, add to the lettersGuessedInternal array
 			if(!letterAlreadyGuessed){
+				//remember also: pop("element") = deletes the last element in an array
+				//pop(element) = adds element to the end of the array
 				entireGame.lettersGuessedInternal.push(userChoice);
 			}
 			console.log(entireGame.lettersGuessedInternal);
-			console.log(userChoice);
 			if(!letterAlreadyGuessed){
 				//check if the userChoice is in the currentWord
 				for(var i = 0; i<entireGame.currentWord.length; i++){
 					console.log(entireGame.currentWord.charAt(i));
-					console.log(userChoice);
 					if(userChoice===entireGame.currentWord.charAt(i)){
-						userChoice = userChoice.toUpperCase();
 						console.log(entireGame.underscoresDisplayed.substring(0,i));
 						console.log(userChoice);
 						console.log(entireGame.underscoresDisplayed.substring(i,entireGame.underscoresDisplayed.length));
 						//replace the userChoice letter as a capital letter in the
 						//correct position in underscoresDisplayed
 						//(need to separate underscoredDisplayed into 3 strings and then concatenate)
-						entireGame.underscoresDisplayed = entireGame.underscoresDisplayed.substring(0,i) + userChoice + entireGame.underscoresDisplayed.substring(i+1,entireGame.underscoresDisplayed.length);
+						entireGame.underscoresDisplayed = entireGame.underscoresDisplayed.substring(0,i) + userChoice.toUpperCase() + entireGame.underscoresDisplayed.substring(i+1,entireGame.underscoresDisplayed.length);
 						goodLetter = true;
 					}
 					if(goodLetter){
@@ -232,35 +233,11 @@ function startPlaying() {
 }
 
 
-
-
-
-//entireGame.currentLetter = String.fromCharCode(event.keyCode).toLowerCase();
-
 //document.queryselector??
-
-// parseInt(var) = turns the var into a number (eg as 
-// obtained from a prompt)
+//use a switch statement??
 
 // arrayName.indexOf("elementInTheArray") = returns the
 // index number of that element
-
-
-	// for (var i=0; i<myFarm.length; i++){
-	// 	var firstLetter = myFarm[i].charAt(0);
-	// 	if (firstLetter =="c"){
-	// 		console.log("This animal's name starts with a c!");
-	// 	}
-	// 	else if (firstLetter == "o"){
-	// 		console.log("This animal's name starts with a o!");
-	// 	}
-	// 	else{
-	// 		console.log("This animal does not start with a c or o.");
-	// 	}
-	// }
-
-// push("element") = adds elements to the end of an array
-// pop("element") = deletes the last element in an array
 
 		// function vowelChecker(x){
 		// 	var wordSplit = x.split("");
@@ -272,7 +249,4 @@ function startPlaying() {
 		// 		console.log("the first letter in " + x + " is NOT a vowel.")				
 		// 	}
 		// }
-
 		//firstCharacter = x.toLowerCase().charAt(0);
-
-//use a switch statement??
