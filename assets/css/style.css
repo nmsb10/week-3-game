@@ -24,7 +24,7 @@ h1, h2, h3{
 
 p{
 	font-family: "Helvetica", 'Helvetica Neue', Arial, sans-serif;
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: 400;
 	color: #000000;
 	text-align: center;
@@ -36,6 +36,31 @@ ul, li{
 	font-weight: 400;
 	color: #000000;
 	text-align: center;
+}
+
+.primary-game{
+	width: 950px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.leftside-winning-stats{
+	width: 450px;
+	float:left;
+}
+
+#game-message{
+	background-color:#ffffff;
+	padding: 15px 25px 25px 25px;
+	/* border: width style color; */
+	border:1px solid #cccccc;
+	border-radius: 7px;
+}
+
+.rightside-game-status{
+	width: 500px;
+	float:left;
 }
 
 #start-button{

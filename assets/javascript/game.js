@@ -235,6 +235,8 @@ function startPlaying() {
 
 //document.queryselector??
 //use a switch statement??
+//functions that return values??
+//indexOf (returns -1 if not in there)
 
 // arrayName.indexOf("elementInTheArray") = returns the
 // index number of that element
