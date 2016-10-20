@@ -29,29 +29,22 @@
 				<p id="game-message">
 				  the game will speak to you here.
 				</p>
+				<p>
+				  Words you won:
+				</p>
+				<div id="winning-words">
+				</div>
 <!--
 			http://www.w3schools.com/jsref/jsref_statements.asp
 
 			http://www.w3schools.com/colors/colors_picker.asp
--->
-			<!-- empty div, display congratulatory / winning word related text and/or image -->
-
-			<!-- two columns, left column accumulates winning words (either text or pictures) 
-
-			user innerHTML to display results to the player
-
-			Organize your game code as an object, except for the key events to get the letter guessed. This will be a challenge if you haven't coded with JavaScript before, but we encourage anyone already familiar with the language to try this out.
-Save your whole game and it's properties in an object.
-Save any of your game's functions as methods, and call them underneath your object declaration using event listeners.
-Don't forget to place your global variables and functions above your object.
-Remember: global variables, then objects, then calls.
-Definitely talk with a TA or your instructor if you get tripped up during this challenge.
 
 			also, create a responsive layout so may be played on a phone
 
-			use gitignore file that ignores files like .DS_Store-->
+			use gitignore file that ignores files like .DS_Store
+-->
 			</div> <!-- /leftside-winning-stats -->
-			<div class="rightside-game-status">
+			<div class="rightside-game-status" id="total-winner">
 				<button onclick="startPlaying()" id="start-button">Click to Start Playing!</button>
 				<p>
 				  Wins:
@@ -78,7 +71,7 @@ Definitely talk with a TA or your instructor if you get tripped up during this c
 				  ?
 				</p>
 				<p>
-				  Game Attempts &amp Win % :
+				  Current Game Attempt # &amp Win % :
 				</p>
 				<p id="attempts-win-percentage">
 				  0 | 0.00%

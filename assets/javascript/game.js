@@ -1,6 +1,8 @@
 //use camelCase for naming everything in javascript
+//remember: first global variables, then objects, then calls
 var entireGame = {
-	wordBank: ["seller", "buyer", "investor", "landlord", "renter", "broker", "contract", "home inspection", "mortgage", "cash offer", "closing", "attorney", "full price offer", "multiple offer", "contingency", "staging"],
+	//wordBank: ["seller", "buyer", "investor", "landlord", "renter", "broker", "contract", "home inspection", "mortgage", "cash offer", "closing", "attorney", "full price offer", "multiple offer", "contingency", "staging"],
+	wordBank:["one","two","thre","four","five"],
 	currentWord: "",
 	currentLetter: "",
 	guessesRemaining: 13,
@@ -13,7 +15,7 @@ var entireGame = {
 	attempts: 0,
 	winPercentage: 0,
 	gameMessage: "",
-	wordsWon: [],
+	winMessage: ["You win AGAIN. Good job. Try another!", "You're on fire! Can you do another?", "Fantastic! Another WIN for You! :)"],
 
 	updateScore: function(){
 		document.getElementById("score").innerHTML = entireGame.wins;
@@ -30,12 +32,57 @@ var entireGame = {
 		document.getElementById("letters-guessed").innerHTML = "???";
 	},
 
+	resetGuessesRemaining: function(){
+		entireGame.guessesRemaining=13;
+		document.getElementById("guesses-remaining").innerHTML = entireGame.guessesRemaining;
+	},
+
+	addWinningWord: function(){
+		var winningWordList = document.getElementById("winning-words");
+		var winningWords = document.createElement("ul");
+
+		winningWordList.appendChild(winningWords);
+
+		var newWinningWord = document.createElement("li");
+		newWinningWord.innerHTML = entireGame.currentWord.toUpperCase();
+
+		winningWords.appendChild(newWinningWord);
+		//document.getElementById("winning-words").innerHTML = entireGame.currentWord.toUpperCase();
+		//remove a winning word from the wordBank array
+		for(var i = 0;i<entireGame.wordBank.length;i++){
+			if(entireGame.currentWord===entireGame.wordBank[i]){
+				//the splice method will remove the one element at
+				//index i, without leaving a "undefined" "hole" in the wordBank array
+				entireGame.wordBank.splice(i,1);
+				console.log(entireGame.wordBank);
+			}
+		}
+		if(entireGame.wordBank.length===0){
+			document.getElementById("game-message").innerHTML = "Awesome! You correctly guessed ALL the words. A+!";
+			document.getElementById("score").innerHTML = "<img src='./assets/images/goodjob.JPG' alt='you won' style='width:350px'>";
+		}
+    },
+
 	addAttempt: function(){
 		entireGame.attempts ++;
 	},
 
+	addWin: function(){
+		entireGame.wins ++;
+	},
+
+	//to be clear, the win percentage reflects total wins divided by
+	//the total completed attempts (so does not include the current partially
+	//completed attempt in the calculation).
+	//I might want separate "completed attempts" and "current game #" fields...
 	calculateWinPercentage: function(){
-		entireGame.winPercentage = (entireGame.wins / entireGame.attempts) * 100;
+		var netAttempts = entireGame.attempts - 1;
+		if(netAttempts<1){
+			entireGame.winPercentage = (entireGame.wins / entireGame.attempts) * 100;
+		}
+		else{
+			entireGame.winPercentage = (entireGame.wins / netAttempts) * 100;
+		}
 		entireGame.winPercentage = entireGame.winPercentage.toFixed(2);
 		document.getElementById("attempts-win-percentage").innerHTML = entireGame.attempts + " | " + entireGame.winPercentage + "%";		
 	},
@@ -69,7 +116,10 @@ var entireGame = {
 
 	fillLetterSpaces: function(){
 		document.getElementById("letter-spaces").innerHTML = entireGame.underscoresDisplayed;
-		//document.getElementById("game-message").innerHTML = "Please press any letter.";
+	},
+
+	specialWinMessage: function(){
+		document.getElementById("game-message").innerHTML =  entireGame.winMessage[Math.floor(Math.random() * entireGame.winMessage.length)];
 	},
 
 	userGuessesLetter: function(){
@@ -77,6 +127,7 @@ var entireGame = {
 			var userChoice = String.fromCharCode(event.keyCode).toLowerCase();
 			var goodLetter = false;
 			var letterAlreadyGuessed = false;
+			var correctLetters = 0;
 			//need to first check that the letter is not in lettersGuessed
 			console.log(entireGame.lettersGuessedInternal);
 			for(var i = 0; i<entireGame.lettersGuessedInternal.length; i++){
@@ -127,17 +178,26 @@ var entireGame = {
 			//check if all letters guessed are in the selected word
 			//if yes, 1. message congratulates player and says try another!, 2. wins (updateScore) AND attempts increases one, 2.25 add winning word to winning-stats counter, 2.35 remove word from wordBank, 2. 5 calculate win percentage,
 			//3. select a new word, 4. reset guesses to 13, 5. reset letters guessed AND lettersguessedinternal
-			// var checkIfWinner= function(){
-			// 	var correctLetters = 0;
-			// 	for(var i = 0; i<entireGame.currentWord.length; i++){
-			// 		if(userChoice===entireGame.currentWord.charAt(i)){
-			// 			correctLetters++;
-			// 		}
-			// 	}
-			// 	if(correctLetters===entireGame.currentWord.length){
-			// 		//all winning result code here
-
-			// 	}
+			if(entireGame.underscoresDisplayed===entireGame.currentWord.toUpperCase()){
+				if(entireGame.wins===0){
+					document.getElementById("game-message").innerHTML = "Congratulations! You WIN. Try another word!";
+				}
+				else if(entireGame.wins>0){
+					entireGame.specialWinMessage();
+				}
+				entireGame.addAttempt();
+				entireGame.addWin();
+				entireGame.updateScore();
+				entireGame.calculateWinPercentage();
+				//addWinningWord MUST come before selectWord (selecting a new word)
+				entireGame.addWinningWord();
+				entireGame.selectWord();
+				entireGame.resetGuessesRemaining();
+				entireGame.populateUnderscoresDisplayed();
+				entireGame.refreshLettersGuessed();
+				entireGame.fillLetterSpaces();
+				console.log(entireGame.currentWord);
+			}
 
 			//check if guesses remaining = 0. 
 			//if yes, 1. message says no more guesses, try another word, better luck!, 2. attempts increases one,  2. 5 calculate win percentage,
@@ -147,17 +207,18 @@ var entireGame = {
 				entireGame.addAttempt();
 				entireGame.calculateWinPercentage();
 				entireGame.selectWord();
-				entireGame.guessesRemaining=13;
-				document.getElementById("guesses-remaining").innerHTML = entireGame.guessesRemaining;
+				entireGame.resetGuessesRemaining();
 				entireGame.populateUnderscoresDisplayed();
 				entireGame.refreshLettersGuessed();
-				entireGame.fillLetterSpaces();				
+				entireGame.fillLetterSpaces();
+				console.log(entireGame.currentWord);
 			}
 		}		
 	}
 };
 
 function startPlaying() {
+	document.getElementById("game-message").innerHTML = "Please press any letter.";
 	entireGame.updateScore();
 	entireGame.refreshLetterSpaces();
 	entireGame.refreshLettersGuessed();
@@ -166,10 +227,8 @@ function startPlaying() {
 	entireGame.selectWord();
 	console.log(entireGame.currentWord);
 	entireGame.populateUnderscoresDisplayed();
-	console.log(entireGame.underscoresDisplayed);
 	entireGame.fillLetterSpaces();
 	entireGame.userGuessesLetter();
-
 }
 
 
