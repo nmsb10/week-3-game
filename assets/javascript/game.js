@@ -1,7 +1,6 @@
 //remember: first global variables, then objects, then calls
 var entireGame = {
 	wordBank: ["seller", "buyer", "investor", "landlord", "renter", "broker", "contract", "home inspection", "mortgage", "cash offer", "closing", "attorney", "full price offer", "multiple offer", "contingency", "staging"],
-	//wordBank:["one","two","thre","four","five"],
 	currentWord: "",
 	currentLetter: "",
 	guessesRemaining: 13,
@@ -130,8 +129,8 @@ var entireGame = {
 			var letterAlreadyGuessed = false;
 			var correctLetters = 0;
 			//need to first check that the letter is not in lettersGuessed
-			console.log("letters already guessed: " + entireGame.lettersGuessedInternal);
-			console.log("current user guess: "+ userChoice);
+			//console.log("letters already guessed: " + entireGame.lettersGuessedInternal);
+			//console.log("current user guess: "+ userChoice);
 			for(var i = 0; i<entireGame.lettersGuessedInternal.length; i++){
 				if(userChoice===entireGame.lettersGuessedInternal[i]){
 					letterAlreadyGuessed = true;
@@ -144,15 +143,15 @@ var entireGame = {
 				//pop(element) = adds element to the end of the array
 				entireGame.lettersGuessedInternal.push(userChoice);
 			}
-			console.log(entireGame.lettersGuessedInternal);
+			//console.log("letters guessed: " + entireGame.lettersGuessedInternal);
 			if(!letterAlreadyGuessed){
 				//check if the userChoice is in the currentWord
 				for(var i = 0; i<entireGame.currentWord.length; i++){
-					console.log(entireGame.currentWord.charAt(i));
+					//console.log(entireGame.currentWord.charAt(i));
 					if(userChoice===entireGame.currentWord.charAt(i)){
-						console.log(entireGame.underscoresDisplayed.substring(0,i));
-						console.log(userChoice);
-						console.log(entireGame.underscoresDisplayed.substring(i,entireGame.underscoresDisplayed.length));
+						//console.log(entireGame.underscoresDisplayed.substring(0,i));
+						//console.log(userChoice);
+						//console.log(entireGame.underscoresDisplayed.substring(i,entireGame.underscoresDisplayed.length));
 						//replace the userChoice letter as a capital letter in the
 						//correct position in underscoresDisplayed
 						//(need to separate underscoredDisplayed into 3 strings and then concatenate)
@@ -229,9 +228,25 @@ function startPlaying() {
 	console.log(entireGame.currentWord);
 	entireGame.populateUnderscoresDisplayed();
 	entireGame.fillLetterSpaces();
+	document.getElementById("start-button").innerHTML = "click to change word";
 	entireGame.userGuessesLetter();
 }
 
+// <script>
+// function person(firstName,lastName,age,eyeColor) {
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+//     this.age = age;
+//     this.eyeColor = eyeColor;
+//     this.changeName = function (name) {
+//         this.lastName = name;
+//     }
+// }
+// var myMother = new person("Sally","Rally",48,"green");
+// myMother.changeName("Doe");
+// document.getElementById("demo").innerHTML =
+// "My mother's last name is " + myMother.lastName;
+// </script>
 
 //document.queryselector??
 //use a switch statement??

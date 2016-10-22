@@ -5,28 +5,32 @@ html, body{
 
 body{
 	background: #e6e6e6;
+	background: url("../images/one.JPG");
+	background-color: rgba(78, 42, 132,1);
+	background-size: 100%;
+	background-repeat: no-repeat;
 	font-family: "Helvetica", 'Helvetica Neue', Arial, sans-serif;
 	font-size: 15px;
-	color: rgba(0,0,0,0);
-}
-
-header{
-	padding: 15px 0;
+	/*color:#000000;*/
+	/* these rgba values correspond to background-color: #404040
+	final number indicates opacity; 0 = invisible, 1 = opaque*/
+	color: rgba(0,0,0,1);
 }
 
 h1, h2, h3{
 	font-family: 'Georgia', Times, "Times New Roman", serif;
-	font-size: 30px;
-	font-weight: 700;
-	color: #000000;
+	font-size: 25px;
+	font-weight: 600;
+	color: rgba(255,255,255,1);
 	text-align: center;
 }
 
 p{
 	font-family: "Helvetica", 'Helvetica Neue', Arial, sans-serif;
-	font-size: 25px;
+	font-size: 21px;
 	font-weight: 400;
-	color: #000000;
+	/*color: #000000;*/
+	color: rgba(255,255,255,1);
 	text-align: center;
 }
 
@@ -38,34 +42,183 @@ ul, li{
 	text-align: center;
 }
 
-.primary-game{
-	width: 950px;
-	height: auto;
-	margin-left: auto;
-	margin-right: auto;
+.good-fit{
+	width: 100%;
+	max-width: 960px;
+	margin: 0 auto;
+	clear:both;
 }
 
-.leftside-winning-stats{
-	width: 450px;
+header{
+	background: rgba(0,0,0,0.45);
+	/*position fixed is positioned relative to the viewport,
+	which means it always stays in the same place even if the
+	page is scrolled. The top, right, bottom, and left properties
+	are used to position the element.*/
+	position: fixed;
+	width: 100%;
+	color: rgba(255,255,255,1);
+}
+
+#hdlinks-left{
+	width:35%;
+	float:left;
+	overflow:auto;
+}
+
+#hdlink-center{
+	width:30%;
+	float: left;
+}
+
+#hdlinks-right{
+	width:35%;
+	float: right;
+	overflow:auto;
+}
+
+#center-name{
+	font-family: 'Georgia', Times, "Times New Roman", serif;
+	font-size: 30px;
+	font-weight: 700;
+	/*position absolute is positioned relative to the nearest
+	positioned ancestor (instead of positioned relative to the
+	viewport, like fixed). However; if an absolute positioned
+	element has no positioned ancestors, it uses the document
+	body, and moves along with page scrolling.*/
+	/*position: absolute;*/
+	/*display:inline;*/
+	color: purple;
+	letter-spacing: 2px;
+	/*difference between inline-block and block??*/
+	display:block;
+	text-align:center;
+	padding:15px;
+	margin:auto;
+}
+
+#center-name:link, #center-name:visited, #center-name:active{
+	text-decoration: none;
+	/*color: rgba(255,255,255,1);*/
+}
+
+.header-link{
+	font-size:17px;
+	margin:37px 15px 5px 15px;
+	border-radius:7px;
+}
+
+.header-link-left{
+	float:right;
+}
+
+.header-link-left:first-child{
+	margin-right:20px;
+}
+
+.header-link-right{
 	float:left;
 }
 
-#game-message{
-	background-color:#ffffff;
-	padding: 15px 25px 25px 25px;
+.header-link-right:first-child{
+	margin-left:20px;
+}
+
+.header-link:link, .header-link:visited, .header-link:active{
+	text-decoration: none;
+	color: rgba(255,255,255,1);
+}
+
+.header-link:hover{
+	font-size: 21px;
+	/*text-decoration: underline;*/
+	background-color: lime;
+	color:purple;
+}
+
+#middle{
+/*	this ensures the middle material remains below all of the header
+*/	padding-top: 120px;
+}
+
+#content-summary{
+	width: 100%;
+	/*want the total max width to be 200px. left and right padding plus borders is 14px*/
+	/*therefore the max content width is 200px - 14px*/
+	max-width: 186px;
+	height: 100%;
+	min-height: 150px;
+	background: rgba(78, 42, 132,0.45);
+	padding: 20px 5px;
 	/* border: width style color; */
+	border:2px solid rgba(78, 42, 132,1);
+	border-radius:7px;
+	float:left;
+}
+
+#content-name{
+	padding: 0px 0px 10px 0px;
+}
+
+#content-edition{
+	padding: 10px 0px 0px 0px;
+	font-size:22px;
+}
+
+#main-content{
+	width: 100%;
+	max-width: 700px;
+	float:left;
+	margin: 0px 0px 50px 20px;
+}
+
+#leftside-winning-stats{
+	width: 100%;
+	/*with adding of 20 and border of 2, total width is 344px*/
+	max-width: 300px;
+	background: rgba(78, 42, 132,0.45);
+	padding: 20px;
+	border:2px solid rgba(78, 42, 132,1);
+	border-radius:7px;
+	float: left;
+	overflow: auto;
+}
+
+#winning-words{
+	margin-top:8px;
+}
+
+#game-message{
+	min-height: 50px;
+	color: rgba(78, 42, 132,0.8);
+	background-color:#ffffff;
+	padding: 12px;
+	margin: 10px 0px;
 	border:1px solid #cccccc;
 	border-radius: 7px;
 }
 
 .rightside-game-status{
-	width: 500px;
-	float:left;
+	/*can be total width 396px*/
+	width: 100%;
+	/*with adding of 20 and border of 2, total width is 344px*/
+	max-width: 290px;
+	background: rgba(78, 42, 132,0.45);
+	padding: 20px;
+	border:2px solid rgba(78, 42, 132,1);
+	border-radius:7px;
+	margin-left: 20px;
+	overflow: auto;
+	float: left;
 }
 
 #start-button{
 	display: block;
 	margin: auto;
+	font-size:21px;
+	border:2px solid rgba(78, 42, 132,0.75);
+	border-radius:5px;
+	margin-bottom: 17px;
 }
 
 #letter-spaces{
@@ -89,16 +242,17 @@ should equal the footer height. */
 }
 
 footer{
-	/* these rgba values correspond to background-color: #404040
-	final number indicates opacity; 0 = invisible, 1 = opaque*/
-	background: rgba(64,64,64,1);
-	font-size:12px;
-	color: #f2f2f2;
-	padding: 20px 0;
+	background: rgba(64,64,64,1);	
 /* NORthwestern colors:;	RGB color: r = 078, g = 042, b = 132
 Hexadecimal: 4E2A84*/
 	border-top: 5px solid #4E2A84;
 	text-align: center;	
+}
+
+#centered-footer-content{
+	font-size: 12px;
+	color: #f2f2f2;
+	padding: 20px 0;
 }
 
 .footer-link:link, .footer-link:visited, .footer-link:active{
@@ -109,4 +263,39 @@ Hexadecimal: 4E2A84*/
 .footer-link:hover{
 	text-decoration: underline;
 	background-color: lime;
+	color: purple;
 }
+
+#for-contact-links-positioning{
+	position:relative;
+}
+
+/*#sidebar{
+	position: absolute;
+	top: auto;
+	right:0;
+	bottom:auto;
+}
+
+#contact-me{
+	width: 100%;
+	text-align: center;
+	background-color:#ffffff;
+	padding:5px;
+	border:1px solid #cccccc;
+	border-radius:7px;
+}
+
+.logo-link{
+	width: 35px;
+	margin: 5px;
+}
+
+#logo-link-linkedinsmaller{
+	width: 40px;
+	margin: 5px;
+}
+
+.logo-link:last-child{
+	margin-right:0;
+}*/
